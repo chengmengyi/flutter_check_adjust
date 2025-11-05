@@ -1,7 +1,7 @@
 name: flutter_check_adjust
 description: "flutter check adjust"
 version: 0.0.1
-homepage:
+homepage: https://github.com/chengmengyi/flutter_check_adjust
 
 environment:
   sdk: ^3.9.2
