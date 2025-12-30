@@ -38,4 +38,28 @@ class DioHep{
       return DioResult(success: false, msg: "");
     }
   }
+
+  Future<DioResult> requestGet({
+    required String path,
+    required dynamic data,
+    Map<String,dynamic>? header,
+    String? contentType,
+  })async{
+    if(null!=header){
+      _dio?.options.headers=header;
+    }
+    if(null!=contentType){
+      _dio?.options.contentType=contentType;
+    }
+    try{
+      var response = await _dio?.request<String>(
+          path,
+          queryParameters: data,
+          options: Options(method: "get")
+      );
+      return DioResult(success: response?.statusCode==200, msg: response?.data??"");
+    }catch(e){
+      return DioResult(success: false, msg: "");
+    }
+  }
 }
