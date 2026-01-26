@@ -49,7 +49,10 @@ class FlutterCheckAdjust {
         return false;
       }
     }else{
-      var referrerBuyUser = _checkReferrerBuyUser();
+      var referrerBuyUser=true;
+      if(_referrerConfList.isNotEmpty){
+        referrerBuyUser = _checkReferrerBuyUser();
+      }
       var adjustBuyUser = AfStorageHep.instance.getAfResult().isNotEmpty;
       log("check user---> checkUser --->referrerBuyUser:$referrerBuyUser--->adjustBuyUser:$adjustBuyUser");
       if(!referrerBuyUser&&!adjustBuyUser){
