@@ -31,7 +31,9 @@ class FlutterCheckAdjust {
     _requestCloak=RequestCloak(url: clockUrl, data: cloakData, whiteKey: cloakWhiteKey, requestCloakCallback: requestCloakCallback);
     _requestAdjust?.init();
     _requestCloak?.init();
-    RequestReferrer().init();
+    if(_referrerConfList.isNotEmpty){
+      RequestReferrer().init();
+    }
   }
 
   bool checkUser(){
@@ -49,7 +51,7 @@ class FlutterCheckAdjust {
         return false;
       }
     }else{
-      var referrerBuyUser=true;
+      var referrerBuyUser=false;
       if(_referrerConfList.isNotEmpty){
         referrerBuyUser = _checkReferrerBuyUser();
       }
