@@ -32,7 +32,7 @@ class RequestAdjust{
         AfStorageHep.instance.saveAfResult(network);
         requestAdjustCallback.firstRequestAdjustB.call();
       }
-      requestAdjustCallback.requestSuccess.call(isB);
+      requestAdjustCallback.requestSuccess.call(isB,network);
     };
     adjustConfig.eventSuccessCallback= (AdjustEventSuccess eventSuccessData) {
       // checkListener?.adjustEventCall(eventSuccessData);

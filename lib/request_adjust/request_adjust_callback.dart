@@ -1,6 +1,6 @@
 class RequestAdjustCallback{
   final void Function() startRequestAdjust;
-  final void Function(bool isB) requestSuccess;
+  final void Function(bool isB,String network) requestSuccess;
   final void Function() firstRequestAdjustB;
 
   const RequestAdjustCallback({
