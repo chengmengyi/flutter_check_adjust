@@ -80,6 +80,7 @@ class FlutterCheckAdjust {
   updateReferrerList(List<String> list){
     _referrerConfList.clear();
     _referrerConfList.addAll(list);
+    log("check user---> updateReferrerList ---> $list");
   }
 
   // logEvent({
