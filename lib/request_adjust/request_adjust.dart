@@ -3,6 +3,7 @@ import 'package:adjust_sdk/adjust_ad_revenue.dart';
 import 'package:adjust_sdk/adjust_attribution.dart';
 import 'package:adjust_sdk/adjust_config.dart';
 import 'package:adjust_sdk/adjust_event_success.dart';
+import 'package:flutter_check_adjust/callback/request_callback.dart';
 import 'package:flutter_check_adjust/flutter_check_adjust.dart';
 import 'package:flutter_check_adjust/request_adjust/request_adjust_callback.dart';
 import 'package:flutter_check_adjust/storage/storage_hep.dart';
@@ -10,7 +11,7 @@ import 'package:flutter_check_adjust/storage/storage_hep.dart';
 class RequestAdjust{
   String appToken;
   String distinctId;
-  RequestAdjustCallback requestAdjustCallback;
+  RequestCallback requestCallback;
   Function()? aPackageAfCall;
 
   bool afIsB=false;
@@ -18,7 +19,7 @@ class RequestAdjust{
   RequestAdjust({
     required this.appToken,
     required this.distinctId,
-    required this.requestAdjustCallback,
+    required this.requestCallback,
   });
 
   init()async{
@@ -30,14 +31,14 @@ class RequestAdjust{
       var isB = network.isNotEmpty&&!network.contains("Organic");
       if(isB&&AfStorageHep.instance.getAfResult().isEmpty){
         AfStorageHep.instance.saveAfResult(network);
-        requestAdjustCallback.firstRequestAdjustB.call();
+        requestCallback.requestAdjustCallback.firstRequestAdjustB.call();
       }
-      requestAdjustCallback.requestSuccess.call(isB,network);
+      requestCallback.requestAdjustCallback.requestSuccess.call(isB,network);
     };
     adjustConfig.eventSuccessCallback= (AdjustEventSuccess eventSuccessData) {
       // checkListener?.adjustEventCall(eventSuccessData);
     };
-    requestAdjustCallback.startRequestAdjust.call();
+    requestCallback.requestAdjustCallback.startRequestAdjust.call();
     FlutterCheckAdjust.instance.log("check user---> start request adjust");
     Adjust.initSdk(adjustConfig);
   }

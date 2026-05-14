@@ -1,10 +1,12 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_check_adjust/callback/request_callback.dart';
 import 'package:flutter_check_adjust/request_adjust/request_adjust.dart';
 import 'package:flutter_check_adjust/request_adjust/request_adjust_callback.dart';
 import 'package:flutter_check_adjust/request_cloak/request_cloak.dart';
 import 'package:flutter_check_adjust/request_cloak/request_cloak_callback.dart';
 import 'package:flutter_check_adjust/request_referrer/request_referrer.dart';
+import 'package:flutter_check_adjust/request_referrer/request_referrer_callback.dart';
 import 'package:flutter_check_adjust/storage/storage_hep.dart';
 
 class FlutterCheckAdjust {
@@ -21,19 +23,15 @@ class FlutterCheckAdjust {
     required String clockUrl,
     required String cloakWhiteKey,
     required Map<String,dynamic> cloakData,
-    required List<String> referrerConfList,
-    required RequestAdjustCallback requestAdjustCallback,
-    required RequestCloakCallback requestCloakCallback,
+    required RequestCallback requestCallback,
   }){
-    _referrerConfList.clear();
-    _referrerConfList.addAll(referrerConfList);
-    _requestAdjust=RequestAdjust(appToken: adjustAppToken, distinctId: distinctId, requestAdjustCallback: requestAdjustCallback);
-    _requestCloak=RequestCloak(url: clockUrl, data: cloakData, whiteKey: cloakWhiteKey, requestCloakCallback: requestCloakCallback);
+    _requestAdjust=RequestAdjust(appToken: adjustAppToken, distinctId: distinctId, requestCallback: requestCallback);
+    _requestCloak=RequestCloak(url: clockUrl, data: cloakData, whiteKey: cloakWhiteKey, requestCallback: requestCallback);
     _requestAdjust?.init();
     _requestCloak?.init();
-    if(_referrerConfList.isNotEmpty){
-      RequestReferrer().init();
-    }
+    RequestReferrer(
+      requestCallback: requestCallback,
+    ).init();
   }
 
   bool checkUser(){
@@ -79,12 +77,17 @@ class FlutterCheckAdjust {
     _requestAdjust?.uploadAdRevenue(networkName, revenue, adId);
   }
 
-  logEvent({
-    required String eventName,
-    Map? eventValues,
-  }){
-    // _requestAf?.logEvent(eventName: eventName,eventValues: eventValues);
+  updateReferrerList(List<String> list){
+    _referrerConfList.clear();
+    _referrerConfList.addAll(list);
   }
+
+  // logEvent({
+  //   required String eventName,
+  //   Map? eventValues,
+  // }){
+  //   _requestAf?.logEvent(eventName: eventName,eventValues: eventValues);
+  // }
 
   log(String s){
     if(kDebugMode){
