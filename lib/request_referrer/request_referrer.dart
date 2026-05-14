@@ -1,9 +1,7 @@
 import 'dart:io';
-import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
 import 'package:android_play_install_referrer/android_play_install_referrer.dart';
 import 'package:flutter_check_adjust/callback/request_callback.dart';
 import 'package:flutter_check_adjust/flutter_check_adjust.dart';
-import 'package:flutter_check_adjust/request_referrer/request_referrer_callback.dart';
 import 'package:flutter_check_adjust/storage/storage_hep.dart';
 
 class RequestReferrer{
