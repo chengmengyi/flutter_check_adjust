@@ -16,6 +16,7 @@ class FlutterCheckAdjust {
   RequestAdjust? _requestAdjust;
   RequestCloak? _requestCloak;
   final List<String> _referrerConfList=[];
+  bool _referrerAlwaysB=false;
 
   init({
     required String adjustAppToken,
@@ -50,8 +51,12 @@ class FlutterCheckAdjust {
       }
     }else{
       var referrerBuyUser=false;
-      if(_referrerConfList.isNotEmpty){
-        referrerBuyUser = _checkReferrerBuyUser();
+      if(_referrerAlwaysB){
+        referrerBuyUser=true;
+      }else{
+        if(_referrerConfList.isNotEmpty){
+          referrerBuyUser = _checkReferrerBuyUser();
+        }
       }
       var adjustBuyUser = AfStorageHep.instance.getAfResult().isNotEmpty;
       log("check user---> checkUser --->referrerBuyUser:$referrerBuyUser--->adjustBuyUser:$adjustBuyUser");
@@ -77,10 +82,11 @@ class FlutterCheckAdjust {
     _requestAdjust?.uploadAdRevenue(networkName, revenue, adId);
   }
 
-  updateReferrerList(List<String> list){
+  updateReferrerList(bool referrerAlwaysB,List<String> list){
     _referrerConfList.clear();
     _referrerConfList.addAll(list);
-    log("check user---> updateReferrerList ---> $list");
+    _referrerAlwaysB=referrerAlwaysB;
+    log("check user---> updateReferrerList ---> $list--->referrerAlwaysB:$referrerAlwaysB");
   }
 
   // logEvent({
