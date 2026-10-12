@@ -1,7 +1,6 @@
 import 'package:flutter_check_adjust/callback/request_callback.dart';
 import 'package:flutter_check_adjust/dio/dio_hep.dart';
 import 'package:flutter_check_adjust/flutter_check_adjust.dart';
-import 'package:flutter_check_adjust/request_cloak/request_cloak_callback.dart';
 
 class RequestCloak{
   String url;
