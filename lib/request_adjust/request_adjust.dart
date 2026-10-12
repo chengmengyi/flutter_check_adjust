@@ -48,12 +48,6 @@ class RequestAdjust {
       requestCallback.requestAdjustCallback.requestSuccess.call(isB, network);
       finishHeadlessLifecycle(reason: 'attribution callback');
     };
-    adjustConfig.sessionSuccessCallback = (_) {
-      finishHeadlessLifecycle(reason: 'session success callback');
-    };
-    adjustConfig.sessionFailureCallback = (_) {
-      finishHeadlessLifecycle(reason: 'session failure callback');
-    };
     adjustConfig.eventSuccessCallback = (AdjustEventSuccess eventSuccessData) {
       // checkListener?.adjustEventCall(eventSuccessData);
     };

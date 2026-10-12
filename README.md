@@ -23,8 +23,8 @@ FlutterCheckAdjust.instance.init(
 ```
 
 插件会补一次 Adjust 前台生命周期，使首次 session 和 attribution 请求能够启动。
-归因、session 成功、session 失败或安全时间到达后，会自动结束模拟前台，但不会
-销毁 Adjust、FlutterEngine 或 attribution 回调。
+attribution 返回或安全时间到达后，会自动结束模拟前台，但不会销毁 Adjust、
+FlutterEngine 或 attribution 回调。Session 成功或失败不会提前结束模拟前台。
 
 如果模拟前台期间用户真正打开 UI，在 UI 初始化最前面调用：
 
